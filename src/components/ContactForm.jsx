@@ -13,7 +13,7 @@ export default function ContactForm() {
         console.log("Value ", value);
     }
     return (
-        <div className=" bg-primary" >
+        <div className=" " >
             <div className="   max-w-7xl lg:px-11 sm:px-4 px-2 mx-auto pb-24 " >
 
 
