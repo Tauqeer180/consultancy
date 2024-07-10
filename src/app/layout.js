@@ -33,7 +33,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${fredoka.className} ${kode.variable} ${fredoka.variable}`}>
+      <body
+        className={`${albert.variable} ${inter.variable} ${kode.variable} ${fredoka.variable}`}
+      >
         <Header />
         {children}
         <ContactForm />

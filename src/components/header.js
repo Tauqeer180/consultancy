@@ -10,6 +10,7 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { MyLink } from "./common/button";
 
 const navigation = [
   { name: "About", href: "/about", current: true },
@@ -64,19 +65,19 @@ export default function Header() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex lg:space-x-4 justify-end">
                     {navigation.map((item) => (
-                      <a
+                      <MyLink
                         key={item.name}
                         href={item.href}
-                        className={classNames(
-                          item.current
-                            ? " text-active"
-                            : "text-white  hover:text-active",
-                          "rounded-md px-3 py-2 text-sm "
-                        )}
-                        aria-current={item.current ? "page" : undefined}
+                        // className={classNames(
+                        //   item.current
+                        //     ? " text-active"
+                        //     : "text-white  hover:text-active",
+                        //   "rounded-md px-3 py-2 text-sm "
+                        // )}
+                        // aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </a>
+                      </MyLink>
                     ))}
                   </div>
                 </div>
