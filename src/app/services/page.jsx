@@ -13,7 +13,7 @@ export default function page() {
       <div className=" md:space-y-20 ">
         {Services?.map(({ image, title, price, time }, i) => {
           return (
-            <div className="grid sm:grid-cols-2 grid-cols-1 items-center border border-black">
+            <div key={i} className="grid sm:grid-cols-2 grid-cols-1 items-center border border-black">
               <div className="">
                 <Image
                   alt="banner"
