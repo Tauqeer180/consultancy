@@ -2,10 +2,26 @@ import React from "react";
 
 export default function page() {
   return (
-    <div className=" max-w-7xl lg:px-11 sm:px-4 mx-auto pb20">
-      <h2 className="sm:pb-11 pb-2 sm:pt-20 pt-16 text-center md:text-6xl sm:text-4xl text-3xl uppercase tracking-wider">
+    <div className=" max-w-7xl lg:px-11 sm:px-6 px-4 mx-auto pb20">
+      <h2 className="sm:pb-11 pb-6 sm:pt-20 pt-16 text-center md:text-6xl sm:text-4xl text-3xl uppercase tracking-wider">
         contact us
       </h2>
+      <div className="pb-6 sm:pb-11">
+        <h3 className="font-normal md:text-4xl sm:text-3xl text-2xl sm:pb-4 pb-2">
+          We’re Here to Help
+        </h3>
+        <p className="sm:pb-4 pb-2 font-light">
+          At Noyagastya Consulatancy, we are dedicated to providing exceptional
+          service and support. Whether you have questions, need guidance, or
+          want to schedule a consultation appointment, we are here to assist
+          you.
+        </p>
+        <p className="font-light">
+          To discuss your case with us, please fill out the contact form below
+          and upload all the necessary documents. Our team will review your
+          information and get in touch with you shortly.
+        </p>
+      </div>
       <div className="grid sm:grid-cols-2">
         <div>
           <div className="z-10 relative h-full max-md:min-h-[350px]">
@@ -18,7 +34,7 @@ export default function page() {
           </div>
         </div>
         <div>
-          <div className="w-full p-4 space-y-4">
+          <div className="w-full sm:ps-4 sm:py-0 py-4 space-y-4">
             <div className="bg-secondary text-white p-4 rounded-lg shadow">
               <h5 className="text-h5">Address</h5>
               <p>500 Terry Francine Street, San Francisco, CA 94158</p>
