@@ -109,10 +109,10 @@ export default function page() {
             </li>
           </ul>
           <P>
-            Whether you're looking to advance your education, build a career, or
-            reunite with family, Noyagastya Consultancy is committed to helping
-            you navigate the complexities of the German visa process with
-            confidence and ease.
+            Whether {`you're`} looking to advance your education, build a
+            career, or reunite with family, Noyagastya Consultancy is committed
+            to helping you navigate the complexities of the German visa process
+            with confidence and ease.
           </P>
         </div>
 
@@ -128,7 +128,7 @@ export default function page() {
             Northern Ireland, is renowned for its rich history, diverse culture,
             and world-class education system. From the historic landmarks of
             London to the stunning landscapes of the Scottish Highlands, the UK
-            offers a unique blend of tradition and modernity. Whether you're
+            offers a unique blend of tradition and modernity. Whether {`you're`}
             planning to study at a prestigious university, explore iconic
             tourist destinations, or reunite with family, the UK provides a
             vibrant and dynamic environment for all visitors.
@@ -144,11 +144,11 @@ export default function page() {
           </P>
           <H5>Visit Visa</H5>
           <P>
-            Planning a trip to the UK? Whether it's for leisure, business, or to
-            visit family and friends, we simplify the visit visa application
-            process. Our consultants help you understand the requirements,
-            prepare the necessary documents, and increase your chances of a
-            successful application.
+            Planning a trip to the UK? Whether {`it's`} for leisure, business,
+            or to visit family and friends, we simplify the visit visa
+            application process. Our consultants help you understand the
+            requirements, prepare the necessary documents, and increase your
+            chances of a successful application.
           </P>
 
           <H5>Family Reunification Visa (FRV)</H5>
@@ -194,8 +194,8 @@ export default function page() {
             cities, offers a myriad of experiences for visitors. From the iconic
             Taj Mahal to the serene backwaters of Kerala, India captivates with
             its vibrant traditions, delicious cuisine, and warm hospitality.
-            Whether you're visiting for tourism, business, or to reconnect with
-            family, India promises an unforgettable journey filled with
+            Whether {`you're`} visiting for tourism, business, or to reconnect
+            with family, India promises an unforgettable journey filled with
             enriching experiences.
           </P>
           <H4>Services for India</H4>
@@ -280,9 +280,9 @@ export default function page() {
           businesses harness the power of technology to achieve their goals. Our
           team of experts specializes in web development, web applications, web
           designing, remote sensing, geographic information systems (GIS), and
-          geospatial analyses. Whether you're looking to build a robust online
-          presence or leverage geospatial data for strategic decision-making, we
-          have the expertise to deliver exceptional results.
+          geospatial analyses. Whether {`you're`} looking to build a robust
+          online presence or leverage geospatial data for strategic
+          decision-making, we have the expertise to deliver exceptional results.
         </P>
         <H3>The Services are:</H3>
         <H4>Web Development</H4>
@@ -319,8 +319,8 @@ export default function page() {
         <H4>Remote Sensing</H4>
         <P>
           Harness the power of remote sensing technology to gather, analyze, and
-          interpret data about the Earth's surface. Our remote sensing services
-          provide valuable insights for various applications, including
+          interpret data about the {`Earth's`} surface. Our remote sensing
+          services provide valuable insights for various applications, including
           environmental monitoring, agriculture, urban planning, and disaster
           management. Using advanced sensors and analytical techniques, we
           deliver accurate and actionable data to support informed
@@ -378,10 +378,10 @@ export default function page() {
           <P>
             Embarking on your educational journey can be overwhelming, but
             Noyagastya Consultancy is here to provide expert guidance and
-            support. Whether you're a student in India aiming for a career in
-            nursing or seeking to pursue higher education in Germany or the UK,
-            we offer comprehensive consulting services to help you achieve your
-            academic aspirations.
+            support. Whether {`you're`} a student in India aiming for a career
+            in nursing or seeking to pursue higher education in Germany or the
+            UK, we offer comprehensive consulting services to help you achieve
+            your academic aspirations.
           </P>
           <H3>For Students in India</H3>
           <H5>Nursing College Admissions</H5>
@@ -437,12 +437,16 @@ export default function page() {
           <P>
             Optimize your study plan with our course selection services for
             German universities. We help you identify courses that align with
-            your educational background and future aspirations, whether you're
-            pursuing a Bachelor's, Master's, vocational training, or a PHD.
+            your educational background and future aspirations, whether{" "}
+            {`you're`}
+            pursuing a {`Bachelor's`}, {`Master's`}, vocational training, or a
+            PHD.
           </P>
-          <H5>Bachelor's, Master's, Vocational Training, and PhD Programs</H5>
+          <H5>
+            {`Bachelor's`}, {`Master's`}, Vocational Training, and PhD Programs
+          </H5>
           <P>
-            Whether you're looking to pursue undergraduate or postgraduate
+            Whether {`you're`} looking to pursue undergraduate or postgraduate
             studies, vocational training, or a doctoral degree in Germany, we
             provide comprehensive consulting services to guide you through the
             application process and course selection.
@@ -463,10 +467,12 @@ export default function page() {
           <P>
             Streamline your educational path with our course selection services
             for UK universities. We help you choose courses that align with your
-            academic interests and professional goals, whether you're pursuing a
-            Bachelor's or Master's degree.
+            academic interests and professional goals, whether {`you're`}{" "}
+            pursuing a{`Bachelor's`} or {`Master's`} degree.
           </P>
-          <H5>Bachelor's and Master's Programs</H5>
+          <H5>
+            {`Bachelor's`} and {`Master's`} Programs
+          </H5>
           <P>
             Achieve your academic ambitions with our support for applying to
             undergraduate and postgraduate programs in the UK. We guide you

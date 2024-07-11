@@ -1,5 +1,6 @@
 import Button from "@/components/common/button";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function ServiceCard({ image, title, time, price }) {
