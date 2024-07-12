@@ -1,12 +1,12 @@
 "use client";
 import { Field, Form, Formik } from "formik";
 import React, { useState } from "react";
-import { Input, InputLabel } from "./common/Input";
-import Button from "./common/button";
-import { Inputdisplay } from "./common/constant";
-import { H3 } from "./common/Typography";
+import { Input, InputLabel } from "../common/Input";
+import Button from "../common/button";
+import { Inputdisplay } from "../common/constant";
+import { H3 } from "../common/Typography";
 
-export default function ContactForm() {
+export default function page() {
   const [loading, setLoading] = useState(false);
   const handleSubmit = (value) => {
     console.log("Value ", value);
@@ -14,8 +14,7 @@ export default function ContactForm() {
   return (
     <div className=" ">
       <div className="   max-w-7xl lg:px-11 sm:px-4 px-2 mx-auto pb-24 ">
-        <H3 className={"text-center"}>contact</H3>
-
+        <H3 className="text-center">Share Your Experience</H3>
         <Formik
           initialValues={{}}
           // validationSchema={{}}
@@ -48,20 +47,20 @@ export default function ContactForm() {
                   </div>
                   <div className="">
                     <Input
-                      type="email"
-                      name="email"
-                      value={values?.email}
+                      type="service_taken"
+                      name="service_taken"
+                      value={values?.service_taken}
                       onChange={handleChange}
-                      label="email"
+                      label="service taken"
                       errors={errors}
                     />
                   </div>
                   <div className="">
                     <Input
-                      name="subject"
-                      value={values?.subject}
+                      name="location"
+                      value={values?.location}
                       onChange={handleChange}
-                      label="subject"
+                      label="location"
                       errors={errors}
                     />
                   </div>

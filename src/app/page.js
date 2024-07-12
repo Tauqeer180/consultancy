@@ -1,8 +1,11 @@
 import AboutSection from "@/components/AboutSection";
 import ContactForm from "@/components/ContactForm";
 import MoreInfoSection from "@/components/MoreInfoSection";
+import { H2, H3, P } from "@/components/common/Typography";
 import HeroSection from "@/components/heroSection";
 import Image from "next/image";
+import ShareExperience from "@/components/Testimonials/ShareExperience";
+import Testimonials from "@/components/Testimonials/Testimonials";
 
 export default function Home() {
   return (
@@ -14,6 +17,16 @@ export default function Home() {
 
       <AboutSection />
       {/* <ContactForm /> */}
+      <div className=" bg-[#f7f7f7] ">
+        <div className=" max-w-7xl lg:px-11 sm:px-4 px-2 mx-auto py-20">
+          <Testimonials />
+        </div>
+      </div>
+      <div className=" bg-[#d8e8f2e8] ">
+        <div className=" max-w-7xl lg:px-11 sm:px-4 px-2 mx-auto pt--20">
+          <ShareExperience />
+        </div>
+      </div>
     </div>
   );
   // <main className="flex min-h-screen flex-col items-center justify-between p-24">
