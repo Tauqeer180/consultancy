@@ -34,8 +34,8 @@ export default function Testimonials() {
     <div>
       <H3 className={"text-center"}>What our clients says</H3>
       <P className={"text-center"}>
-        Here's what some of our clients have to say about their experience with
-        Noyagastya Consultancy:
+        {`Here's`} what some of our clients have to say about their experience
+        with Noyagastya Consultancy:
       </P>
       <div className="mt-5 relative pb-5">
         <Carousel

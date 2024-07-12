@@ -14,7 +14,7 @@ export default function Page() {
             Empowering Your Success Across Education, Career, Healthcare, IT,
             and Visa Consulting. At Noyagastya Consultancy, we offer specialized
             consulting services tailored to meet your unique needs. Whether
-            you're a student exploring educational opportunities, a professional
+            {`you're`} a student exploring educational opportunities, a professional
             seeking career guidance, a healthcare provider needing specialized
             advice, a business looking to leverage technology for growth, or an
             individual navigating visa complexity, our dedicated team of experts

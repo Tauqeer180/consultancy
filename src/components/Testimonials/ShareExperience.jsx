@@ -6,7 +6,7 @@ import Button from "../common/button";
 import { Inputdisplay } from "../common/constant";
 import { H3 } from "../common/Typography";
 
-export default function page() {
+export default function Page() {
   const [loading, setLoading] = useState(false);
   const handleSubmit = (value) => {
     console.log("Value ", value);
