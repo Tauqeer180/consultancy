@@ -7,7 +7,7 @@ import React from "react";
 
 export default function page() {
   return (
-    <div className=" max-w-5xl lg:px-11 sm:px-4 mx-auto pb-20 sm:pt-20 pt-10">
+    <div className=" max-w-5xl lg:px-11 sm:px-8 px-4 mx-auto pb-20 sm:pt-20 pt-10">
       <H1>Services</H1>
       <P className="text-center">
         Ready to unlock the full potential of our business? Dive into our

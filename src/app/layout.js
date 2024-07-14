@@ -1,6 +1,6 @@
 import { Inter, Fredoka, Albert_Sans, Kode_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
+import Header from "@/components/header/header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 

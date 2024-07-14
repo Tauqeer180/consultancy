@@ -8,15 +8,48 @@ import {
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  BellIcon,
+  XMarkIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { MyLink } from "./common/button";
+import { MyLink } from "../common/button";
 import Image from "next/image";
+import MobileMenu from "./MobileMenu";
 
 const navigation = [
-  { name: "About", href: "/about", current: true },
+  { name: "Home", href: "/", current: true },
+  {
+    name: "Services",
+    href: "/services",
+    current: false,
+    child: [
+      {
+        name: "Visa Consulting Services",
+        href: "/services/visa-consulting",
+      },
+      {
+        name: "IT Consulting Services",
+        href: "/services/it-consulting",
+      },
+      {
+        name: "Education Consulting Services",
+        href: "/services/education-consulting",
+      },
+      {
+        name: "Career Consulting Services",
+        href: "/services/career-consulting",
+      },
+      {
+        name: "Medical Consulting Services",
+        href: "/services/medical-consulting",
+      },
+    ],
+  },
+  { name: "About", href: "/about", current: false },
   // { name: "Projects", href: "#", current: false },
-  { name: "Services", href: "/services", current: false },
   // { name: "Plans & Pricing", href: "#", current: false },
   // { name: "Tools & Tips", href: "#", current: false },
   { name: "Contact", href: "/contact", current: false },
@@ -65,20 +98,72 @@ export default function Header() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex lg:space-x-4 justify-end">
-                    {navigation.map((item) => (
-                      <MyLink
-                        key={item.name}
-                        href={item.href}
-                        // className={classNames(
-                        //   item.current
-                        //     ? " text-active"
-                        //     : "text-white  hover:text-active",
-                        //   "rounded-md px-3 py-2 text-sm "
-                        // )}
-                        // aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </MyLink>
+                    {navigation.map((item, id) => (
+                      <>
+                        {item?.child?.length > 0 ? (
+                          <>
+                            <Menu key={id} as="div" className="relative ">
+                              {({ open }) => (
+                                <>
+                                  <MenuButton className="relative text-white  hover:text-active rounded-md px-3 py-2 text-sm font-kode ">
+                                    {/* <span className="absolute -inset-1.5" /> */}
+                                    <div className="flex gap-1 items-center">
+                                      <span className="">{item?.name}</span>
+
+                                      <ChevronDownIcon
+                                        className={`${
+                                          open
+                                            ? "transition-transform -rotate-180 duration-500"
+                                            : "transition-transform  duration-500"
+                                        } font-extrabold h-5 w-3 `}
+                                      />
+                                    </div>
+                                  </MenuButton>
+
+                                  <MenuItems
+                                    transition
+                                    className="absolute divide-y-2 right-0 z-10 mt-2 w-60 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                                  >
+                                    {item?.child?.map((ch, i) => {
+                                      return (
+                                        <MenuItem key={i}>
+                                          {({ focus }) => (
+                                            <Link
+                                              href={ch?.href}
+                                              className={classNames(
+                                                focus
+                                                  ? " text-theme font-medium"
+                                                  : "text-theme  hover:text-active",
+                                                " px-3 py-2 text-sm font-kode block"
+                                              )}
+                                            >
+                                              {ch?.name}
+                                            </Link>
+                                          )}
+                                        </MenuItem>
+                                      );
+                                    })}
+                                  </MenuItems>
+                                </>
+                              )}
+                            </Menu>
+                          </>
+                        ) : (
+                          <MyLink
+                            key={item.name}
+                            href={item.href}
+                            // className={classNames(
+                            //   item.current
+                            //     ? " text-active"
+                            //     : "text-white  hover:text-active",
+                            //   "rounded-md px-3 py-2 text-sm "
+                            // )}
+                            // aria-current={item.current ? "page" : undefined}
+                          >
+                            {item.name}
+                          </MyLink>
+                        )}
+                      </>
                     ))}
                   </div>
                 </div>
@@ -147,26 +232,9 @@ export default function Header() {
             </div>
           </div>
 
-          <DisclosurePanel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
-                <DisclosureButton
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </DisclosureButton>
-              ))}
-            </div>
-          </DisclosurePanel>
+          {/* Mobile Menu */}
+
+          <MobileMenu data={navigation} />
         </>
       )}
     </Disclosure>

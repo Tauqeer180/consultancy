@@ -22,7 +22,7 @@ export default function Button({ children, className, ...rest }) {
 
 export const MyLink = ({ children, href, ...rest }) => {
   const path = usePathname();
-  console.log("Pathname  ", path);
+  // console.log("Pathname  ", path);
   return (
     <>
       <Link

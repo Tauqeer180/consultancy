@@ -55,15 +55,7 @@ export default function Page() {
                       errors={errors}
                     />
                   </div>
-                  <div className="">
-                    <Input
-                      name="location"
-                      value={values?.location}
-                      onChange={handleChange}
-                      label="location"
-                      errors={errors}
-                    />
-                  </div>
+                  
                   <div className=" sm:col-span-2 col-span-1">
                     <div className=" relative">
                       <InputLabel>message </InputLabel>
