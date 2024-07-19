@@ -2,7 +2,7 @@ import classNames from "classnames";
 
 export const Inputdisplay =
   "block w-full border-b-2 border-gray-300 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400 sm:text-sm sm:leading-6 focus:ring-0 focus:outline-none peer bg-transparent ";
-export const cn = (...arg) => classNames(arg);
+export const cn = (...arg) => classNames(...arg);
 
 export const Services = [
   {

@@ -13,8 +13,8 @@ export default function ContactForm() {
   };
   return (
     <div className=" ">
-      <div className="   max-w-7xl lg:px-11 sm:px-4 px-2 mx-auto pb-24 ">
-        <H3 className={"text-center"}>contact</H3>
+      <div className="   max-w-7xl mx-auto pb-24 ">
+        {/* <H3 className={"text-center"}>contact</H3> */}
 
         <Formik
           initialValues={{}}
@@ -79,7 +79,7 @@ export default function ContactForm() {
                         onBlur={handleBlur}
                         className={Inputdisplay}
                         onChange={handleChange}
-                        autocomplete="off"
+                        autoComplete="off"
                       />
                     </div>
                     {errors.message && (

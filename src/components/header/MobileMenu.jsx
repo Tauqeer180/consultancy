@@ -23,7 +23,7 @@ export default function MobileMenu({ data }) {
           {data.map((item, ind) => (
             <>
               {item?.child?.length > 0 ? (
-                <>
+                <div key={ind}>
                   <Menu
                     key={ind}
                     data-open={true}
@@ -82,7 +82,7 @@ export default function MobileMenu({ data }) {
                       </>
                     )}
                   </Menu>
-                </>
+                </div>
               ) : (
                 <DisclosureButton
                   key={item.name}

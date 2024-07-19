@@ -1,35 +1,20 @@
-"use client";
 import { H3, P } from "../common/Typography";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import TestiCard from "./TestiCard";
-const responsive = {
-  mobile: {
-    breakpoint: { max: 4000, min: 0 },
-    items: 1,
-  },
+import TestimonialCarousel from "./TestimonialCarousel";
+const fetchData = async () => {
+  const res = await fetch(
+    `${process.env.BASE_URL}/api/testimonials/getactivelist`
+  );
+  const data = await res.json();
+  return data;
 };
-let data = [
-  {
-    message:
-      "1 I'm a testimonial. Click to edit me and add text that says something nice about you and your services.",
-    name: "Sima Patel",
-    service: "Visa",
-  },
-  {
-    message:
-      "2 I'm a testimonial. Click to edit me and add text that says something nice about you and your services.",
-    name: "Sima Patel",
-    service: "Visa",
-  },
-  {
-    message:
-      "2 I'm a testimonial. Click to edit me and add text that says something nice about you and your services.",
-    name: "Sima Patel",
-    service: "Visa",
-  },
-];
-export default function Testimonials() {
+
+export default async function Testimonials() {
+  let data = await fetchData();
+  // console.log("get list Data ", data);
+  
+  if (!data?.success) {
+    return "Some thing Went Wrong";
+  }
   return (
     <div>
       <H3 className={"text-center"}>What our clients says</H3>
@@ -38,26 +23,7 @@ export default function Testimonials() {
         with Noyagastya Consultancy:
       </P>
       <div className="mt-5 relative pb-5">
-        <Carousel
-          ssr={true}
-          autoPlay-
-          showDots
-          infinite
-          dotListClass="gap-1"
-          responsive={responsive}
-          renderDotsOutside={true}
-          containerClass=" relative "
-        >
-          {data?.map((d, i) => {
-            return (
-              <div key={i}>
-                <TestiCard data={d} />
-              </div>
-            );
-          })}
-
-          {/* s */}
-        </Carousel>
+        {data?.data && <TestimonialCarousel initialData={data?.data} />}
       </div>
     </div>
   );

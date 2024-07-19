@@ -4,9 +4,7 @@ import ContactForm from "@/components/ContactForm";
 export default function page() {
   return (
     <>
-      <ContactForm />
-
-      <div className=" max-w-7xl lg:px-11 sm:px-6 px-4 mx-auto pb20">
+      <div className=" max-w-7xl lg:px-11 sm:px-6 px-4 mx-auto pb-20">
         <h2 className="sm:pb-11 pb-6 sm:pt-20 pt-16 text-center md:text-6xl sm:text-4xl text-3xl uppercase tracking-wider">
           contact us
         </h2>
@@ -26,6 +24,7 @@ export default function page() {
             information and get in touch with you shortly.
           </p>
         </div>
+        <ContactForm />
         <div className="grid sm:grid-cols-2">
           <div>
             <div className="z-10 relative h-full max-md:min-h-[350px]">
