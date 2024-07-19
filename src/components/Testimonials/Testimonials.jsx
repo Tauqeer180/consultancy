@@ -11,8 +11,8 @@ const fetchData = async () => {
 export default async function Testimonials() {
   let data = await fetchData();
   // console.log("get list Data ", data);
-  
-  if (!data?.success) {
+
+  if (!data || !data?.success) {
     return "Some thing Went Wrong";
   }
   return (

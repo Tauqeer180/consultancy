@@ -13,7 +13,7 @@ const connectMongo = async () => {
       useUnifiedTopology: true,
     });
 
-    console.log("connected now ", conn);
+    // console.log("connected now ", conn);
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
     throw new Error("May be IP is not whitelisted");
