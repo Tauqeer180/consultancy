@@ -41,7 +41,12 @@ export default function Page() {
       <div className="   max-w-7xl lg:px-11 sm:px-4 px-2 mx-auto pb-24 ">
         <H3 className="text-center">Share Your Experience</H3>
         <Formik
-          initialValues={{}}
+          initialValues={{
+            fName: "",
+            lName: "",
+            service_taken: "",
+            message: "",
+          }}
           validationSchema={TestimSchema}
           validateOnBlur={false}
           validateOnChange={false}

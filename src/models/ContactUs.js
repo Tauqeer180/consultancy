@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const TestimonialsSchema = new mongoose.Schema({
+const ContactUsSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -13,7 +13,11 @@ const TestimonialsSchema = new mongoose.Schema({
   lName: {
     type: String,
   },
-  serviceTaken: {
+  email: {
+    type: String,
+    required: true,
+  },
+  subject: {
     type: String,
     required: true,
   },
@@ -29,5 +33,5 @@ const TestimonialsSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.Testimonials ||
-  mongoose.model("Testimonials", TestimonialsSchema);
+export default mongoose.models.ContactUs ||
+  mongoose.model("ContactUs", ContactUsSchema);

@@ -1,15 +1,44 @@
 "use client";
 import { Field, Form, Formik } from "formik";
+import * as Yup from "yup";
+
 import React, { useState } from "react";
 import { Input, InputLabel } from "./common/Input";
 import Button from "./common/button";
 import { Inputdisplay } from "./common/constant";
 import { H3 } from "./common/Typography";
+import { useAuth } from "@/Providers/AuthContext";
+import { toast } from "sonner";
 
+export const ContactSchema = Yup.object().shape({
+  fName: Yup.string().required("Required"),
+  lName: Yup.string().required("Required"),
+  email: Yup.string().required("Enter valid Email"),
+  subject: Yup.string().required("Required"),
+  message: Yup.string().required("Required"),
+});
 export default function ContactForm() {
+  const { token } = useAuth();
+
   const [loading, setLoading] = useState(false);
-  const handleSubmit = (value) => {
+  const handleSubmit = async (value) => {
     console.log("Value ", value);
+    const res = await fetch("/api/contactus/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(value),
+    });
+    const data = await res.json();
+    if (data?.success) {
+      // login(data?.token, data?.user);
+    } else {
+    }
+    console.log(data);
+    toast(data?.message);
+    // router.push('/')
   };
   return (
     <div className=" ">
@@ -17,8 +46,14 @@ export default function ContactForm() {
         {/* <H3 className={"text-center"}>contact</H3> */}
 
         <Formik
-          initialValues={{}}
-          // validationSchema={{}}
+          initialValues={{
+            fName: "",
+            lName: "",
+            email: "",
+            subject: "",
+            message: "",
+          }}
+          validationSchema={ContactSchema}
           validateOnBlur={false}
           validateOnChange={false}
           enableReinitialize={true}
@@ -30,8 +65,8 @@ export default function ContactForm() {
                 <div className=" overflow-y-auto py-4 md:px-4 px-2 grid  sm:grid-cols-2 grid-cols-1 gap-x-4">
                   <div className="">
                     <Input
-                      name="first_name"
-                      value={values?.first_name}
+                      name="fName"
+                      value={values?.fName}
                       onChange={handleChange}
                       label="first name"
                       errors={errors}
@@ -39,8 +74,8 @@ export default function ContactForm() {
                   </div>
                   <div className="">
                     <Input
-                      name="last_name"
-                      value={values?.last_name}
+                      name="lName"
+                      value={values?.lName}
                       onChange={handleChange}
                       label="last name"
                       errors={errors}
@@ -90,7 +125,7 @@ export default function ContactForm() {
                   </div>
                 </div>
                 <div className="flex justify-end gap-4 pb-3 md:px-4 px-2">
-                  <Button>Submit</Button>
+                  <Button type="submit">Submit</Button>
                 </div>
               </>
             </Form>
