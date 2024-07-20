@@ -12,9 +12,7 @@ const responsive = {
 };
 
 const fetchData = async () => {
-  const res = await fetch(
-    `${process.env.BASE_URL}/api/testimonials/getactivelist`
-  );
+  const res = await fetch(`/api/testimonials/getactivelist`);
   const data = await res.json();
   console.log("Data from Test ", data);
   return data;
