@@ -16,6 +16,7 @@ const fetchData = async () => {
     `${process.env.BASE_URL}/api/testimonials/getactivelist`
   );
   const data = await res.json();
+  console.log("Data from Test ", data);
   return data;
 };
 
@@ -24,9 +25,9 @@ export default function TestimonialCarousel({ initialData }) {
   const { isLoading, error, data } = useQuery({
     queryKey: ["activeTestimonials"],
     queryFn: fetchData,
-    initialData: initialData,
+    // initialData: initialData,
     // placeholderData: initialData,
-    staleTime: 1000,
+    // staleTime: 1000,
   });
   return (
     <Carousel
