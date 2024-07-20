@@ -1,15 +1,13 @@
 import { H3, P } from "../common/Typography";
 import TestimonialCarousel from "./TestimonialCarousel";
 const fetchData = async () => {
-  const res = await fetch(
-    `${process.env.BASE_URL}/api/testimonials/getactivelist`
-  );
+  const res = await fetch(`/api/testimonials/getactivelist`);
   const data = await res.json();
   return data;
 };
 
-export default async function Testimonials() {
-  let data = await fetchData();
+export default function Testimonials() {
+  let data = fetchData();
   // console.log("get list Data ", data);
 
   if (!data || !data?.success) {

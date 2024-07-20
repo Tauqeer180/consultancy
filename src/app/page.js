@@ -19,7 +19,7 @@ export default function Home() {
       {/* <ContactForm /> */}
       <div className=" bg-[#f7f7f7] ">
         <div className=" max-w-7xl lg:px-11 sm:px-4 px-2 mx-auto py-20">
-          {/* <Testimonials /> */}
+          <Testimonials />
         </div>
       </div>
       <div className=" bg-[#d8e8f2e8] ">
