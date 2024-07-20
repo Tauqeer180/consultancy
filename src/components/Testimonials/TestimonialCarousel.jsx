@@ -28,25 +28,29 @@ export default function TestimonialCarousel({ initialData }) {
     // staleTime: 1000,
   });
   return (
-    <Carousel
-      //   ssr={true}
-      autoPlay-
-      showDots
-      infinite
-      dotListClass="gap-1"
-      responsive={responsive}
-      renderDotsOutside={true}
-      containerClass=" relative "
-    >
-      {data?.map((d, i) => {
-        return (
-          <div key={i}>
-            <TestiCard data={d} />
-          </div>
-        );
-      })}
+    <div>
+      {data && (
+        <Carousel
+          //   ssr={true}
+          autoPlay-
+          showDots
+          infinite
+          dotListClass="gap-1"
+          responsive={responsive}
+          renderDotsOutside={true}
+          containerClass=" relative "
+        >
+          {data?.data?.map((d, i) => {
+            return (
+              <div key={i}>
+                <TestiCard data={d} />
+              </div>
+            );
+          })}
 
-      {/* s */}
-    </Carousel>
+          {/* s */}
+        </Carousel>
+      )}
+    </div>
   );
 }
