@@ -31,6 +31,7 @@ const Input = ({
       <div className=" relative">
         {label && <InputLabel htmlFor={name}>{label} </InputLabel>}
         <Field
+          as={type}
           type={type || "text"}
           name={name}
           id={name}

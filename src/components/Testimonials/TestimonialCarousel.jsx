@@ -32,7 +32,7 @@ export default function TestimonialCarousel({ initialData }) {
       {data && (
         <Carousel
           //   ssr={true}
-          autoPlay-
+          autoPlay
           showDots
           infinite
           dotListClass="gap-1"

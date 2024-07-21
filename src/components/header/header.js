@@ -55,6 +55,8 @@ const navigation = [
   // { name: "Plans & Pricing", href: "#", current: false },
   // { name: "Tools & Tips", href: "#", current: false },
   { name: "Contact", href: "/contact", current: false },
+
+  { name: "Appoinment", href: "/book-appoinment", current: false },
 ];
 
 function classNames(...classes) {

@@ -31,6 +31,11 @@ body {
   background-color: transparent !important;
 }
 
+/* React date Picker */
+.react-datepicker-wrapper{
+  width:100%;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
