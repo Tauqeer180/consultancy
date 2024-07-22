@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import Cookies from "js-cookie";
 import useUser from "@/Hooks/useUser";
 import { useAuth } from "@/Providers/AuthContext";
+import Link from "next/link";
 
 export const RegisterSchema = Yup.object().shape({
   fName: Yup.string().required("Required"),
@@ -100,6 +101,14 @@ export default function Register() {
                       type="password"
                       errors={errors}
                     />
+                  </div>
+                  <div className="text-end">
+                    <Link
+                      href="/login"
+                      className="text-gray-400 hover:text-blue-800 font-fredoka text-xs"
+                    >
+                      Have an account? Login Here
+                    </Link>
                   </div>
                   <div className="flex justify-end gap-4 pb-3 md:px-4 px-2 sm:mt-10 mt-6">
                     <Button type="submit">Register</Button>
