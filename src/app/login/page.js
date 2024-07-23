@@ -88,7 +88,7 @@ export default function Login() {
                       href="/register"
                       className="text-gray-400 hover:text-blue-800 font-fredoka text-xs"
                     >
-                      Don't have an account? Register Here
+                      {`Don't`} have an account? Register Here
                     </Link>
                   </div>
                   <div className="flex justify-end gap-4 pb-3 md:px-4 px-2 sm:mt-10 mt-6">
