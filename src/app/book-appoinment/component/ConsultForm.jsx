@@ -1,8 +1,9 @@
 "use client";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-
-import React, { useState } from "react";
+import { FileUploadWithPreview } from "file-upload-with-preview";
+import "file-upload-with-preview/dist/style.css";
+import React, { useEffect, useState } from "react";
 import { Input, InputLabel } from "@/components/common/Input";
 import Button from "@/components/common/button";
 import { Inputdisplay } from "@/components/common/constant";
@@ -314,6 +315,34 @@ export default function ContactForm() {
     // toast(data?.message);
     // router.push('/')
   };
+
+  useEffect(() => {
+    const file_cnic = new FileUploadWithPreview("file_cnic", {
+      accept: ".pdf",
+      text: { label: "CNIC" },
+    });
+    const file_passport = new FileUploadWithPreview("file_passport", {
+      accept: ".pdf",
+      text: { label: "Passport" },
+    });
+    const file_degrees = new FileUploadWithPreview("file_degrees", {
+      accept: ".pdf",
+      text: { label: "degress and certifications" },
+    });
+    const file_exp_letter = new FileUploadWithPreview("file_exp_letter", {
+      accept: ".pdf",
+      text: { label: "experience letter" },
+    });
+    const file_lang_cert = new FileUploadWithPreview("file_lang_cert", {
+      accept: ".pdf",
+      text: { label: "language certificate" },
+    });
+    const file_addit_docs = new FileUploadWithPreview("file_addit_docs", {
+      accept: ".pdf",
+      text: { label: "any additional Docs" },
+    });
+  }, []);
+
   return (
     <div className=" ">
       <div className="   max-w-7xl mx-auto pb-24 ">
@@ -1054,6 +1083,34 @@ export default function ContactForm() {
                       errors={errors}
                     />
                   </div>
+
+                  <div className=" py-4 md:col-span-3 sm:col-span-2 col-span-1 ">
+                    <hr />
+                  </div>
+                  <div
+                    class="custom-file-container"
+                    data-upload-id="file_cnic"
+                  ></div>
+                  <div
+                    class="custom-file-container"
+                    data-upload-id="file_passport"
+                  ></div>
+                  <div
+                    class="custom-file-container"
+                    data-upload-id="file_degrees"
+                  ></div>
+                  <div
+                    class="custom-file-container"
+                    data-upload-id="file_exp_letter"
+                  ></div>
+                  <div
+                    class="custom-file-container"
+                    data-upload-id="file_lang_cert"
+                  ></div>
+                  <div
+                    class="custom-file-container"
+                    data-upload-id="file_addit_docs"
+                  ></div>
                 </div>
                 <div className="flex justify-end gap-4 pb-3 md:px-4 px-2">
                   <Button type="submit">Submit</Button>
