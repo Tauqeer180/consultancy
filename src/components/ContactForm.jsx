@@ -9,6 +9,7 @@ import { Inputdisplay } from "./common/constant";
 import { H3 } from "./common/Typography";
 import { useAuth } from "@/Providers/AuthContext";
 import { toast } from "sonner";
+import Loader from "./common/Loader";
 
 export const ContactSchema = Yup.object().shape({
   fName: Yup.string().required("Required"),
@@ -22,7 +23,7 @@ export default function ContactForm() {
 
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (value) => {
-    console.log("Value ", value);
+    setLoading(true);
     const res = await fetch("/api/contactus/create", {
       method: "POST",
       headers: {
@@ -33,15 +34,18 @@ export default function ContactForm() {
     });
     const data = await res.json();
     if (data?.success) {
+      // setLoading(false);
       // login(data?.token, data?.user);
     } else {
     }
+    setLoading(false);
     console.log(data);
     toast(data?.message);
     // router.push('/')
   };
   return (
     <div className=" ">
+      {loading && <Loader />}
       <div className="   max-w-7xl mx-auto pb-24 ">
         {/* <H3 className={"text-center"}>contact</H3> */}
 

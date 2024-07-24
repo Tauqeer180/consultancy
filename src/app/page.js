@@ -6,10 +6,12 @@ import HeroSection from "@/components/heroSection";
 import Image from "next/image";
 import ShareExperience from "@/components/Testimonials/ShareExperience";
 import Testimonials from "@/components/Testimonials/Testimonials";
+import Loader from "@/components/common/Loader";
 
 export default function Home() {
   return (
     <div>
+      {/* <Loader /> */}
       <HeroSection />
       <div className=" max-w-7xl lg:px-11 sm:px-4 px-2 mx-auto pt-20">
         <MoreInfoSection />

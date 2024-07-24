@@ -2,6 +2,7 @@
 import useUser from "@/Hooks/useUser";
 import { useAuth } from "@/Providers/AuthContext";
 import { Input } from "@/components/common/Input";
+import Loader from "@/components/common/Loader";
 import { H3 } from "@/components/common/Typography";
 import Button from "@/components/common/button";
 import { Form, Formik } from "formik";
@@ -17,11 +18,13 @@ export const LoginSchema = Yup.object().shape({
   password: Yup.string().min(5, "Enter valid password").required("Required"),
 });
 export default function Login() {
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const { refreshAuth } = useUser();
   const router = useRouter();
 
   const handleSubmit = async (values) => {
+    setLoading(true);
     console.log("Login Value ", values);
     // e.preventDefault();
     const res = await fetch("/api/auth/login", {
@@ -37,9 +40,11 @@ export default function Login() {
       login(data?.token, data?.user);
       // Cookies.set("token", data?.token);
       // Cookies.set("user", JSON.stringify(data?.user));
+      setLoading(false);
       router.replace("/");
       // refreshAuth();
     } else {
+      setLoading(false);
     }
     console.log(data);
     toast(data?.message);
@@ -47,6 +52,7 @@ export default function Login() {
 
   return (
     <div className=" ">
+      {loading && <Loader />}
       <div className="   max-w-7xl lg:px-11 sm:px-4 px-2 mx-auto pb-24 ">
         <H3 className="text-center">Login</H3>
         <Formik

@@ -118,7 +118,7 @@ export default function ProfileBtn() {
           </MenuItems>
         </Menu>
       ) : (
-        <MyLink href="/login">Log in</MyLink>
+        <MyLink href="/login">Login</MyLink>
       )}
     </div>
   );

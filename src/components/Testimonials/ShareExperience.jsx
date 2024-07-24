@@ -8,6 +8,7 @@ import { Inputdisplay } from "../common/constant";
 import { H3 } from "../common/Typography";
 import { toast } from "sonner";
 import { useAuth } from "@/Providers/AuthContext";
+import Loader from "../common/Loader";
 export const TestimSchema = Yup.object().shape({
   fName: Yup.string().required("Required"),
   lName: Yup.string().required("Required"),
@@ -18,7 +19,7 @@ export default function Page() {
   const { token } = useAuth();
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (value) => {
-    console.log("Value ", value);
+    setLoading(true);
     const res = await fetch("/api/testimonials/create", {
       method: "POST",
       headers: {
@@ -29,8 +30,10 @@ export default function Page() {
     });
     const data = await res.json();
     if (data?.success) {
+      setLoading(false);
       // login(data?.token, data?.user);
     } else {
+      setLoading(false);
     }
     console.log(data);
     toast(data?.message);
@@ -38,6 +41,7 @@ export default function Page() {
   };
   return (
     <div className=" ">
+      {loading && <Loader />}
       <div className="   max-w-7xl lg:px-11 sm:px-4 px-2 mx-auto pb-24 ">
         <H3 className="text-center">Share Your Experience</H3>
         <Formik

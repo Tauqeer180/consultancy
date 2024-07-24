@@ -25,6 +25,9 @@ module.exports = {
         albert: ["var(--font-albert)"],
         kode: ["var(--font-kode)"],
       },
+      screens: {
+        xxs: "400px",
+      },
     },
   },
   plugins: [],

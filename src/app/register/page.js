@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import useUser from "@/Hooks/useUser";
 import { useAuth } from "@/Providers/AuthContext";
 import Link from "next/link";
+import Loader from "@/components/common/Loader";
 
 export const RegisterSchema = Yup.object().shape({
   fName: Yup.string().required("Required"),
@@ -20,12 +21,14 @@ export const RegisterSchema = Yup.object().shape({
   password: Yup.string().min(5, "Enter valid password").required("Required"),
 });
 export default function Register() {
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const { refreshAuth } = useUser();
   const router = useRouter();
 
   const handleSubmit = async (values) => {
     // e.preventDefault();
+    setLoading(true);
     const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: {
@@ -36,15 +39,18 @@ export default function Register() {
     const data = await res.json();
     if (data?.success) {
       login(data?.token, data?.user);
+      setLoading(false);
     } else {
     }
     console.log(data);
     toast(data?.message);
+    setLoading(false);
     // router.push('/')
   };
 
   return (
     <div className=" ">
+      {loading && <Loader />}
       <div className="   max-w-7xl lg:px-11 sm:px-4 px-2 mx-auto pb-24 ">
         <H3 className="text-center">Register</H3>
         <Formik
