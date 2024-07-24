@@ -71,6 +71,7 @@ export default function Page() {
       }),
     });
     let data = await res?.json();
+    console.log("Data success ", data);
     if (data?.success) {
       queryClient?.invalidateQueries({
         queryKey: ["allTestimonials"],

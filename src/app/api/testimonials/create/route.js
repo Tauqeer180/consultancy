@@ -16,7 +16,7 @@ export async function POST(request) {
       lName,
       serviceTaken: service_taken,
       message,
-      status: false,
+      status: true,
     });
     await newTestimonial.save();
 
