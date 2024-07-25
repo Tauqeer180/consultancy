@@ -16,6 +16,7 @@
     "classnames": "^2.5.1",
     "cloudinary": "^2.3.0",
     "file-upload-with-preview": "^6.0.2",
+    "firebase-admin": "^12.2.0",
     "formik": "^2.4.6",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",

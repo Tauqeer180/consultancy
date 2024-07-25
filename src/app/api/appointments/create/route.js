@@ -4,9 +4,11 @@ import { authenticate } from "@/middleware/authMiddleware";
 import Appointment from "@/models/Appointment";
 import multer from "multer";
 import { NextResponse } from "next/server";
+import { useFileUpload } from "../../Hooks/useFileUpload";
 
 const upload = multer({ storage: multer.memoryStorage() });
 export async function POST(request) {
+  const { uploadFile } = useFileUpload();
   try {
     let user = await authenticate(request);
     let formData = await request?.formData();
@@ -83,14 +85,16 @@ export async function POST(request) {
     for (const [key, value] of formData.entries()) {
       if (value instanceof File) {
         try {
-          const result = await cloudinary.uploader.upload_stream(
-            value.stream(),
-            {
-              folder: "appointment_docs",
-            }
-          );
-          console.log("result ", result);
-          documents[key] = result.secure_url;
+          const bytes = await value.arrayBuffer();
+          const buffer = Buffer.from(bytes).toString("base64");
+          let dataURI = "data:" + value.type + ";base64," + buffer;
+          await uploadFile(value, bytes, buffer, dataURI);
+          // const result = await cloudinary.uploader.upload(dataURI, {
+          //   resource_type: "raw",
+          //   folder: "appointment_docs",
+          // });
+          // console.log("result ", result);
+          // documents[key] = result.secure_url;
         } catch (error) {
           return new Response(
             JSON.stringify({

@@ -66,18 +66,18 @@ export default function ContactForm() {
   }, []);
   const handleSubmit = async (value) => {
     console.log(value);
-    toast(value?.high_qualification);
-    console.log("CNIC ", file_cnic?.cachedFileArray);
+    // toast(value?.high_qualification);
+    // console.log("CNIC ", file_cnic?.cachedFileArray);
     const formData = new FormData();
-    for (const key in value) {
-      if (Array.isArray(value[key])) {
-        value[key].forEach((file) => formData.append(key, file));
-      } else {
-        formData.append(key, value[key]);
-      }
-    }
-    formData.append("file_cnic", file_cnic?.cachedFileArray[0]);
-
+    // for (const key in value) {
+    //   if (Array.isArray(value[key])) {
+    //     value[key].forEach((file) => formData.append(key, file));
+    //   } else {
+    //     formData.append(key, value[key]);
+    //   }
+    // }
+    // formData.append("file_cnic", file_cnic?.cachedFileArray[0]);
+    formData.append("file_cnic", value?.target.files[0]);
     const res = await fetch("/api/appointments/create", {
       method: "POST",
       headers: {
@@ -876,7 +876,7 @@ export default function ContactForm() {
                     data-upload-id="file_addit_docs"
                   ></div>
                   <CldUploadWidget
-                    uploadPreset="random_consulting"
+                    uploadPreset="consultation_docs"
                     onSuccess={(result, { widget }) => {
                       console.log("Upload Widget ", result);
                       setFieldValue("file_cnic", result?.info); // { public_id, secure_url, etc }
@@ -895,6 +895,7 @@ export default function ContactForm() {
                       );
                     }}
                   </CldUploadWidget>
+                  <input type="file" onChange={(e) => handleSubmit(e)} />
                 </div>
                 <div className="flex justify-end gap-4 pb-3 md:px-4 px-2">
                   <Button type="submit">Submit</Button>
