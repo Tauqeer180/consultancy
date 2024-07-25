@@ -13,335 +13,88 @@ import { toast } from "sonner";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
+import { CldUploadWidget } from "next-cloudinary";
+import { ConsultSchema } from "./schema";
+import {
+  service,
+  academic_level,
+  career_interest,
+  edu_types,
+  it_services,
+  med_area_concern,
+  proj_start_date,
+  proj_status,
+  visa_types,
+} from "./formData";
 let countries = ["germany", "uk", "india"];
-let service = [
-  "visa consulting",
-  "it consulting",
-  "education consulting",
-  "career consulting",
-  "medical consulting",
-];
-let visa_types = {
-  germany: [
-    "study visa",
-    "au pair visa",
-    "vocational training visa",
-    "family reunion visa (FRV)",
-    "job seeking visa",
-    "visit visa",
-    "qualification recognition",
-    "document preperations",
-    "interview preperations",
-    "attestations and verifications",
-    "other",
-  ],
-  uk: [
-    "study visa",
-    "visit visa",
-    "FRV",
-    "document preparations",
-    "interview preparations",
-    "attestations and verifications",
-  ],
-  india: [
-    "visit visa (for non indians)",
-    "tourist visa (non indians)",
-    "document verifications (indians)",
-    "document attestations (indians)",
-    "notary (indians)",
-    "other",
-  ],
-};
 
-let edu_types = {
-  germany: [
-    "german universities selection",
-    "german universities course selection",
-    "masters",
-    "bachelors",
-    "phd",
-    "ielts bands",
-    "german language level",
-  ],
-  uk: [
-    "uk universities selection",
-    "uk universities course selection",
-    "masters",
-    "bachelors",
-    "other (please specify)",
-  ],
-  india: [
-    "nursing college admissions",
-    "nursing college selection",
-    "nursing course planning",
-    "nursing scholarship guidance",
-  ],
-};
-
-let academic_level = {
-  "education consulting": [
-    "high school student",
-    "undergraduate student",
-    "graduate student",
-    "other (please specify)",
-  ],
-  "career consulting": [
-    "completed 12th grade",
-    "currently in college/university",
-    "recent graduate",
-    "other (please specify)",
-  ],
-};
-let career_interest = [
-  "college/university selection",
-  "nursing programs",
-  "career planning",
-  "resume and interview preparation",
-  "study abroad in germany/uk",
-  "job search strategies",
-  "other (please specify)",
-];
-
-let med_area_concern = [
-  "gynecology (e.g., menstrual issues, pregnancy, menopause)",
-  "general medicine (e.g., chronic illness management, general health concerns)",
-  "both",
-];
-let it_services = [
-  "web development",
-  "web application development",
-  "web designing",
-  "remote sensing",
-  "geographic information systems (gis)",
-  "geospatial analyses",
-  "other (please specify)",
-];
-
-let proj_status = [
-  "idea/planning stage",
-  "in progress",
-  "near completion",
-  "maintenance/support needed",
-];
-let proj_start_date = [
-  "immediate",
-  "within 1-3 months",
-  "within 3-6 months",
-  "flexible",
-];
-export const ConsultSchema = Yup.object().shape({
-  fName: Yup.string().required("Required"),
-  lName: Yup.string().required("Required"),
-  phone: Yup.string().required("Required"),
-  email: Yup.string().email().required("Enter valid Email"),
-  dob: Yup.string().required("Required"),
-  address: Yup.string().required("Required"),
-  service: Yup.string().required("Required"),
-  high_qualification: Yup.string().when("service", {
-    is: "visa consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  de_lang_level: Yup.string().when("service", {
-    is: "visa consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  en_lang_level: Yup.string().when("service", {
-    is: (value) =>
-      value === "visa consulting" || value === "education consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  visa_country: Yup.string().when("service", {
-    is: "visa consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  visa_service_type: Yup.string().when("service", {
-    is: "visa consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-
-  // Visa Consulting Ends
-
-  // Edu Consulting Starts
-
-  edu_background: Yup.string().when("service", {
-    is: "education consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  edu_interest: Yup.string().when("service", {
-    is: "education consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-
-  edu_interest_other: Yup.string().when(["service", "edu_interest"], {
-    is: (service, edu_interest) =>
-      service === "visa consulting" &&
-      edu_interest === "other (please specify)",
-    then: (schema) => schema.required("Please Specify"),
-    // otherwise: (schema) => schema.notRequired(),
-  }),
-
-  cur_acad_level: Yup.string().when("service", {
-    is: "education consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  other_acad_level: Yup.string().when(["service", "cur_acad_level"], {
-    is: (service, cur_acad_level) =>
-      service == "education consulting" &&
-      cur_acad_level == "other (please specify)",
-    then: (schema) => schema.required("Required"),
-  }),
-  quest_or_conc: Yup.string(),
-  additional_info: Yup.string().when("service", {
-    is: "education consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-
-  // Edu consulting Ends
-
-  // Career Consulting Start
-
-  field_of_study: Yup.string().when("service", {
-    is: "career consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  career_interest: Yup.string().when("service", {
-    is: "career consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  other_career_interest: Yup.string().when(["service", "career_interest"], {
-    is: (service, cur_acad_level) =>
-      service == "career consulting" &&
-      cur_acad_level == "other (please specify)",
-    then: (schema) => schema.required("Required"),
-  }),
-  preferred_countries: Yup.string().when("service", {
-    is: "career consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  relev_expe: Yup.string(),
-
-  // Career Consulting Ends
-
-  // Medical Cu=onsulting STarts
-
-  age: Yup.number().when("service", {
-    is: "medical consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-
-  med_history: Yup.string().when("service", {
-    is: "medical consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  med_area_concern: Yup.string().when("service", {
-    is: "medical consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  med_symp_issues: Yup.string().when("service", {
-    is: "medical consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  prev_treat_med: Yup.string().when("service", {
-    is: "medical consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  curr_treat_med: Yup.string().when("service", {
-    is: "medical consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  allergies: Yup.string().when("service", {
-    is: "medical consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  lifestyle_habbits: Yup.string().when("service", {
-    is: "medical consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  // Medical Consulting Ends
-
-  // IT Services Start
-
-  it_service_type: Yup.string().when("service", {
-    is: "it consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  other_it_service_type: Yup.string().when(["service", "it_service_type"], {
-    is: (service, it_service_type) =>
-      service == "it consulting" && it_service_type == "other (please specify)",
-    then: (schema) => schema.required("Required"),
-  }),
-  proj_desc: Yup.string().when("service", {
-    is: "it consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  proj_status: Yup.string().when("service", {
-    is: "it consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  expect_start_date: Yup.string().when("service", {
-    is: "it consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  add_comm_q: Yup.string().when("service", {
-    is: "it consulting",
-    then: (schema) => schema.required("Required"),
-  }),
-  // IT Services ENDs Here
-
-  motivations: Yup.string().required("Required"),
-  goals: Yup.string().required("Required"),
-});
 export default function ContactForm() {
   const { token } = useAuth();
 
   const [loading, setLoading] = useState(false);
-  const handleSubmit = async (value) => {
-    console.log(value);
-    toast(value?.high_qualification);
-    // const res = await fetch("/api/contactus/create", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    //   body: JSON.stringify(value),
-    // });
-    // const data = await res.json();
-    // if (data?.success) {
-    //   // login(data?.token, data?.user);
-    // } else {
-    // }
-    // console.log(data);
-    // toast(data?.message);
-    // router.push('/')
-  };
-
+  var file_cnic,
+    file_passport,
+    file_degrees,
+    file_exp_letter,
+    file_lang_cert,
+    file_addit_docs;
   useEffect(() => {
-    const file_cnic = new FileUploadWithPreview("file_cnic", {
+    file_cnic = new FileUploadWithPreview("file_cnic", {
       accept: ".pdf",
       text: { label: "CNIC" },
     });
-    const file_passport = new FileUploadWithPreview("file_passport", {
+    file_passport = new FileUploadWithPreview("file_passport", {
       accept: ".pdf",
       text: { label: "Passport" },
     });
-    const file_degrees = new FileUploadWithPreview("file_degrees", {
+    file_degrees = new FileUploadWithPreview("file_degrees", {
       accept: ".pdf",
       text: { label: "degress and certifications" },
     });
-    const file_exp_letter = new FileUploadWithPreview("file_exp_letter", {
+    file_exp_letter = new FileUploadWithPreview("file_exp_letter", {
       accept: ".pdf",
       text: { label: "experience letter" },
     });
-    const file_lang_cert = new FileUploadWithPreview("file_lang_cert", {
+    file_lang_cert = new FileUploadWithPreview("file_lang_cert", {
       accept: ".pdf",
       text: { label: "language certificate" },
     });
-    const file_addit_docs = new FileUploadWithPreview("file_addit_docs", {
+    file_addit_docs = new FileUploadWithPreview("file_addit_docs", {
       accept: ".pdf",
       text: { label: "any additional Docs" },
     });
   }, []);
+  const handleSubmit = async (value) => {
+    console.log(value);
+    toast(value?.high_qualification);
+    console.log("CNIC ", file_cnic?.cachedFileArray);
+    const formData = new FormData();
+    for (const key in value) {
+      if (Array.isArray(value[key])) {
+        value[key].forEach((file) => formData.append(key, file));
+      } else {
+        formData.append(key, value[key]);
+      }
+    }
+    formData.append("file_cnic", file_cnic?.cachedFileArray[0]);
+
+    const res = await fetch("/api/appointments/create", {
+      method: "POST",
+      headers: {
+        // "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+    const data = await res.json();
+    if (data?.success) {
+      // login(data?.token, data?.user);
+    } else {
+    }
+    console.log(data);
+    toast(data?.message);
+    // router.push('/')
+  };
 
   return (
     <div className=" ">
@@ -363,6 +116,7 @@ export default function ContactForm() {
           {({ values, handleBlur, handleChange, errors, setFieldValue }) => (
             <Form>
               <>
+                {JSON.stringify(errors)}
                 <div className=" py-4 md:px-4 px-2 grid md:grid-cols-3  sm:grid-cols-2 grid-cols-1 gap-x-4">
                   <div className="">
                     <Input
@@ -524,6 +278,12 @@ export default function ContactForm() {
                           errors={errors}
                         />
                       </div>
+                    </>
+                  )}
+
+                  {(values?.service == "visa consulting" ||
+                    values?.service == "education consulting") && (
+                    <>
                       <div className="">
                         <Input
                           name="en_lang_level"
@@ -533,7 +293,10 @@ export default function ContactForm() {
                           errors={errors}
                         />
                       </div>
-
+                    </>
+                  )}
+                  {values?.service == "visa consulting" && (
+                    <>
                       <div className="mt-2 relative">
                         {/* <label htmlFor="user_id">Choose a User:</label> */}
                         <InputLabel>Visa Service Type</InputLabel>
@@ -799,6 +562,7 @@ export default function ContactForm() {
                         <Input
                           name="age"
                           value={values?.age}
+                          type="number"
                           onChange={handleChange}
                           label="age"
                           errors={errors}
@@ -1111,6 +875,26 @@ export default function ContactForm() {
                     class="custom-file-container"
                     data-upload-id="file_addit_docs"
                   ></div>
+                  <CldUploadWidget
+                    uploadPreset="random_consulting"
+                    onSuccess={(result, { widget }) => {
+                      console.log("Upload Widget ", result);
+                      setFieldValue("file_cnic", result?.info); // { public_id, secure_url, etc }
+                      widget.close();
+                    }}
+                  >
+                    {({ open }) => {
+                      function handleOnClick() {
+                        // setResource(undefined);
+                        open();
+                      }
+                      return (
+                        <button type="button" onClick={handleOnClick}>
+                          Upload an Image
+                        </button>
+                      );
+                    }}
+                  </CldUploadWidget>
                 </div>
                 <div className="flex justify-end gap-4 pb-3 md:px-4 px-2">
                   <Button type="submit">Submit</Button>

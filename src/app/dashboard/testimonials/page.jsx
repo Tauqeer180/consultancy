@@ -1,9 +1,10 @@
 "use client";
 import { useAuth } from "@/Providers/AuthContext";
+import Loader from "@/components/common/Loader";
 import { H2, H3 } from "@/components/common/Typography";
 import { Switch } from "@headlessui/react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import DataTable from "react-data-table-component";
 import { toast } from "sonner";
 
@@ -14,6 +15,7 @@ const fetchData = async () => {
 };
 
 export default function Page() {
+  const [loading, setLoading] = useState(false);
   const { token } = useAuth();
   const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({
@@ -58,6 +60,7 @@ export default function Page() {
   ];
 
   const handleUpdateStatus = async (id, status) => {
+    setLoading(true);
     // debugger;
     let res = await fetch("/api/testimonials/updatestatus", {
       method: "PATCH",
@@ -82,15 +85,17 @@ export default function Page() {
     } else {
     }
     toast(data?.message);
+    setLoading(false);
   };
   return (
     <div className=" max-w-7xl lg:px-11 sm:px-4 px-2 mx-auto pt-20">
+      {(loading || isLoading) && <Loader />}
       <H3 className="text-start">Testimonials</H3>
       <DataTable
         columns={columns}
         data={data?.data}
         pagination
-        progressPending={isLoading}
+        // progressPending={isLoading}
       />
       {/* {JSON.stringify(data)} */}
     </div>

@@ -9,7 +9,7 @@ import DataTable from "react-data-table-component";
 import { toast } from "sonner";
 
 const fetchData = async () => {
-  const res = await fetch(`/api/contactus/getlist`);
+  const res = await fetch(`/api/appointments/getlist`);
   const data = await res.json();
   return data;
 };
@@ -34,13 +34,13 @@ export default function Page() {
       sortable: true,
     },
     {
-      name: "Subject",
-      selector: (row) => row.subject,
+      name: "Phone",
+      selector: (row) => row.phone,
       sortable: true,
     },
     {
-      name: "message",
-      selector: (row) => <div> {row.message} </div>,
+      name: "Service",
+      selector: (row) => <div className=" capitalize" > {row.service} </div>,
       sortable: true,
     },
   ];

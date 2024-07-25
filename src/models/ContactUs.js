@@ -28,8 +28,6 @@ const ContactUsSchema = new mongoose.Schema({
   status: {
     type: Boolean,
     default: false,
-    // 0 => deactive
-    // 1 => active
   },
 });
 
