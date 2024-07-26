@@ -10,9 +10,7 @@ import { NextResponse } from "next/server";
 import { Readable } from "stream";
 import { UploadStream } from "cloudinary";
 import { pipeline } from "stream/promises";
-const upload = multer({ storage: multer.memoryStorage() });
 export async function POST(request) {
-  const bucket = await getGridFSBucket();
 
   try {
     let user = await optionalAuthentication(request);

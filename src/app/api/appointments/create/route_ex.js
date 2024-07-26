@@ -4,7 +4,6 @@ import { authenticate } from "@/middleware/authMiddleware";
 import Appointment from "@/models/Appointment";
 import multer from "multer";
 import { NextResponse } from "next/server";
-import { useFileUpload } from "../../Hooks/useFileUpload";
 import { Readable } from "stream";
 import { UploadStream } from "cloudinary";
 import { pipeline } from "stream/promises";
