@@ -1,7 +1,6 @@
 "use client";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { FileUploadWithPreview } from "file-upload-with-preview";
 import "file-upload-with-preview/dist/style.css";
 import React, { useEffect, useState } from "react";
 import { Input, InputLabel } from "@/components/common/Input";
@@ -13,7 +12,6 @@ import { toast } from "sonner";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import { CldUploadWidget } from "next-cloudinary";
 import { ConsultSchema } from "./schema";
 import {
   service,
@@ -57,11 +55,11 @@ export default function ContactForm() {
     setLoading(true);
     const formData = new FormData();
     for (const key in value) {
-      if (Array.isArray(value[key])) {
-        value[key].forEach((file) => formData.append(key, file));
-      } else {
-        formData.append(key, value[key]);
-      }
+      // if (Array.isArray(value[key])) {
+      //   value[key].forEach((file) => formData.append(key, file));
+      // } else {
+      formData.append(key, value[key]);
+      // }
     }
     console.log("files ", files);
     let fileArray = Object.entries(files)?.map((d) => ({

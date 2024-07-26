@@ -7,13 +7,11 @@ import {
 import Appointment from "@/models/Appointment";
 import multer from "multer";
 import { NextResponse } from "next/server";
-import { useFileUpload } from "../../Hooks/useFileUpload";
 import { Readable } from "stream";
 import { UploadStream } from "cloudinary";
 import { pipeline } from "stream/promises";
 const upload = multer({ storage: multer.memoryStorage() });
 export async function POST(request) {
-  const { uploadFile } = useFileUpload();
   const bucket = await getGridFSBucket();
 
   try {
