@@ -16,13 +16,14 @@ export function useFileUpload(options = {}) {
     const fileName = file.originalFilename || file.name;
     console.log("file name ", fileName);
     const tempDir = os.tmpdir();
-    const filePath = path.join(tempDir, fileName);
+    const filePath = path.join("./temp/", fileName);
 
     console.log("file path ", filePath);
-    console.log("Data , uri ", dataURI?.substring(0, 100));
+    // console.log("Data , uri ", dataURI?.substring(0, 100));
     const base64Data = dataURI.replace(/^data:.*;base64,/, "");
-    const buffer2 = Buffer.from(base64Data, "base64");
-    await writeFile(filePath, buffer2);
+    const buffer2 = await Buffer.from(base64Data, "base64");
+    await fs.writeFileSync(filePath, buffer2);
+    // await writeFile(filePath, buffer2);
     let destination = `consulting/${fileName}-${Date.now()}`;
     const uploadMetadata = {
       contentType: `auto`,
