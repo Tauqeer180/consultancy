@@ -26,58 +26,66 @@ import {
   proj_status,
   visa_types,
 } from "./formData";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { storage } from "@/lib/firebaseConfig";
+import { getBase64 } from "@/utils";
+import Loader from "@/components/common/Loader";
 let countries = ["germany", "uk", "india"];
 
 export default function ContactForm() {
   const { token } = useAuth();
-
+  const [files, setFiles] = useState({});
   const [loading, setLoading] = useState(false);
-  var file_cnic,
-    file_passport,
-    file_degrees,
-    file_exp_letter,
-    file_lang_cert,
-    file_addit_docs;
-  useEffect(() => {
-    file_cnic = new FileUploadWithPreview("file_cnic", {
-      accept: ".pdf",
-      text: { label: "CNIC" },
+
+  // const files = {};
+  const handleFileChange = async (key, value) => {
+    setLoading(true);
+    console.log(key, " = ", value);
+    // console.log("file files ", value?.target?.files);
+    let b64 = await getBase64(value.target.files[0]);
+    setFiles((prev) => {
+      return {
+        ...prev,
+        [key]: b64,
+      };
     });
-    file_passport = new FileUploadWithPreview("file_passport", {
-      accept: ".pdf",
-      text: { label: "Passport" },
-    });
-    file_degrees = new FileUploadWithPreview("file_degrees", {
-      accept: ".pdf",
-      text: { label: "degress and certifications" },
-    });
-    file_exp_letter = new FileUploadWithPreview("file_exp_letter", {
-      accept: ".pdf",
-      text: { label: "experience letter" },
-    });
-    file_lang_cert = new FileUploadWithPreview("file_lang_cert", {
-      accept: ".pdf",
-      text: { label: "language certificate" },
-    });
-    file_addit_docs = new FileUploadWithPreview("file_addit_docs", {
-      accept: ".pdf",
-      text: { label: "any additional Docs" },
-    });
-  }, []);
+    // console.log("base64 ", await getBase64(value.target.files[0]));
+    setLoading(false);
+  };
+  console.log("files => ", files);
   const handleSubmit = async (value) => {
-    console.log(value);
-    // toast(value?.high_qualification);
-    // console.log("CNIC ", file_cnic?.cachedFileArray);
+    setLoading(true);
     const formData = new FormData();
-    // for (const key in value) {
-    //   if (Array.isArray(value[key])) {
-    //     value[key].forEach((file) => formData.append(key, file));
-    //   } else {
-    //     formData.append(key, value[key]);
-    //   }
-    // }
-    // formData.append("file_cnic", file_cnic?.cachedFileArray[0]);
-    formData.append("file_cnic", value?.target.files[0]);
+    for (const key in value) {
+      if (Array.isArray(value[key])) {
+        value[key].forEach((file) => formData.append(key, file));
+      } else {
+        formData.append(key, value[key]);
+      }
+    }
+    console.log("files ", files);
+    let fileArray = Object.entries(files)?.map((d) => ({
+      [d[0]]: d[1],
+    }));
+    console.log("files array ", fileArray);
+    let uploadPromises = fileArray?.map(async (d) => {
+      const bookRef = ref(
+        storage,
+        `pdfs/${Date.now()}-${parseInt(Math.random() * 50)}`
+      );
+      let myDoc = Object.entries(d)[0];
+      console.log("mydoc 1 ", myDoc);
+      return uploadString(bookRef, myDoc[1], "data_url").then(
+        async (snapshot) => {
+          console.log("Uploaded a blob or file!", snapshot);
+          const pdfLink = await getDownloadURL(snapshot.ref);
+          console.log("pdfLinks ", pdfLink);
+          formData.append(myDoc[0], pdfLink);
+        }
+      );
+    });
+    console.log("promis ", uploadPromises);
+    await Promise.all(uploadPromises);
     const res = await fetch("/api/appointments/create", {
       method: "POST",
       headers: {
@@ -88,16 +96,20 @@ export default function ContactForm() {
     });
     const data = await res.json();
     if (data?.success) {
+      setLoading(false);
       // login(data?.token, data?.user);
+      toast(data?.message);
     } else {
+      toast(data?.message);
+      setLoading(false);
     }
     console.log(data);
-    toast(data?.message);
     // router.push('/')
   };
 
   return (
     <div className=" ">
+      {loading && <Loader />}
       <div className="   max-w-7xl mx-auto pb-24 ">
         {/* <H3 className={"text-center"}>contact</H3> */}
 
@@ -465,7 +477,7 @@ export default function ContactForm() {
                   {/* Education Consulting Ends Here */}
 
                   {/* Career Consulting Starts  */}
-                  {values?.service == "education consulting" && (
+                  {values?.service == "career consulting" && (
                     <>
                       <div>
                         <Input
@@ -535,6 +547,7 @@ export default function ContactForm() {
                           studying or working abroad)
                         </p>
                       </div>
+
                       <div>
                         <Input
                           name="relev_expe"
@@ -851,51 +864,62 @@ export default function ContactForm() {
                   <div className=" py-4 md:col-span-3 sm:col-span-2 col-span-1 ">
                     <hr />
                   </div>
-                  <div
-                    class="custom-file-container"
-                    data-upload-id="file_cnic"
-                  ></div>
-                  <div
-                    class="custom-file-container"
-                    data-upload-id="file_passport"
-                  ></div>
-                  <div
-                    class="custom-file-container"
-                    data-upload-id="file_degrees"
-                  ></div>
-                  <div
-                    class="custom-file-container"
-                    data-upload-id="file_exp_letter"
-                  ></div>
-                  <div
-                    class="custom-file-container"
-                    data-upload-id="file_lang_cert"
-                  ></div>
-                  <div
-                    class="custom-file-container"
-                    data-upload-id="file_addit_docs"
-                  ></div>
-                  <CldUploadWidget
-                    uploadPreset="consultation_docs"
-                    onSuccess={(result, { widget }) => {
-                      console.log("Upload Widget ", result);
-                      setFieldValue("file_cnic", result?.info); // { public_id, secure_url, etc }
-                      widget.close();
-                    }}
-                  >
-                    {({ open }) => {
-                      function handleOnClick() {
-                        // setResource(undefined);
-                        open();
-                      }
-                      return (
-                        <button type="button" onClick={handleOnClick}>
-                          Upload an Image
-                        </button>
-                      );
-                    }}
-                  </CldUploadWidget>
-                  <input type="file" onChange={(e) => handleSubmit(e)} />
+                  <div className="mt-2 relative">
+                    {/* <label htmlFor="user_id">Choose a User:</label> */}
+                    <InputLabel>CNIC:</InputLabel>
+                    <div>
+                      <input
+                        type="file"
+                        onChange={(e) => handleFileChange("file_cnic", e)}
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-2 relative">
+                    {/* <label htmlFor="user_id">Choose a User:</label> */}
+                    <InputLabel>passport:</InputLabel>
+
+                    <input
+                      type="file"
+                      accept=".pdf"
+                      onChange={(e) => handleFileChange("file_passport", e)}
+                    />
+                  </div>
+                  <div className="mt-2 relative">
+                    {/* <label htmlFor="user_id">Choose a User:</label> */}
+                    <InputLabel>Degrees:</InputLabel>
+
+                    <input
+                      type="file"
+                      onChange={(e) => handleFileChange("file_degrees", e)}
+                    />
+                  </div>
+                  <div className="mt-2 relative">
+                    {/* <label htmlFor="user_id">Choose a User:</label> */}
+                    <InputLabel>Experience Letter:</InputLabel>
+
+                    <input
+                      type="file"
+                      onChange={(e) => handleFileChange("file_exp_letter", e)}
+                    />
+                  </div>
+                  <div className="mt-2 relative">
+                    {/* <label htmlFor="user_id">Choose a User:</label> */}
+                    <InputLabel>Language Certificate:</InputLabel>
+
+                    <input
+                      type="file"
+                      onChange={(e) => handleFileChange("file_lang_cert", e)}
+                    />
+                  </div>
+                  <div className="mt-2 relative">
+                    {/* <label htmlFor="user_id">Choose a User:</label> */}
+                    <InputLabel>Any Additional Docs:</InputLabel>
+
+                    <input
+                      type="file"
+                      onChange={(e) => handleFileChange("file_addit_docs", e)}
+                    />
+                  </div>
                 </div>
                 <div className="flex justify-end gap-4 pb-3 md:px-4 px-2">
                   <Button type="submit">Submit</Button>
