@@ -25,7 +25,7 @@ export default function page() {
           </p>
         </div>
         <ContactForm />
-        <div className="grid sm:grid-cols-2">
+        <div className="grid sm:grid-cols-2 gap-8">
           <div>
             <div className="z-10 relative h-full max-md:min-h-[350px]">
               <iframe

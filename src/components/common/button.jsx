@@ -9,6 +9,8 @@ function classNames(...classes) {
 export default function Button({ children, className, ...rest }) {
   return (
     <button
+      data-aos="fade-up"
+      // data-aos-anchor-placement="bottom-center"
       {...rest}
       className={cn(
         className,
