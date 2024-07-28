@@ -4,13 +4,21 @@ import React from "react";
 export default function Page() {
   return (
     <div className=" max-w-7xl lg:px-11 sm:px-4 mx-auto pb-20">
-      <h2 className="sm:pb-11 pb-2 sm:pt-20 pt-16 text-center md:text-6xl sm:text-4xl text-3xl uppercase tracking-wider">
+      <h2
+        data-aos="fade-up"
+        data-aos-duration="800"
+        className="sm:pb-11 pb-2 sm:pt-20 pt-16 text-center md:text-6xl sm:text-4xl text-3xl uppercase tracking-wider"
+      >
         About us
       </h2>
 
       <div className="grid sm:grid-cols-2 grid-cols-1 items-center">
         <div className="px-4 sm:px-2 sm:pe-16">
-          <p className=" text-base font-light pb-4">
+          <p
+            className=" text-base font-light pb-4"
+            data-aos="fade-up"
+            data-aos-duration="800"
+          >
             Empowering Your Success Across Education, Career, Healthcare, IT,
             and Visa Consulting. At Noyagastya Consultancy, we offer specialized
             consulting services tailored to meet your unique needs. Whether
@@ -20,7 +28,11 @@ export default function Page() {
             growth, or an individual navigating visa complexity, our dedicated
             team of experts is here to support you.
           </p>
-          <p className=" text-base font-light max-sm:pb-4">
+          <p
+            className=" text-base font-light max-sm:pb-4"
+            data-aos="fade-up"
+            data-aos-duration="800"
+          >
             From personalized education planning and career counseling to
             specialized medical advice, innovative IT solutions, and streamlined
             visa services, we provide comprehensive support to help you achieve
