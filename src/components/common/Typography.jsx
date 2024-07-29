@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 
 export function H1({ children, className }) {

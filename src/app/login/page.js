@@ -6,7 +6,7 @@ import Loader from "@/components/common/Loader";
 import { H3 } from "@/components/common/Typography";
 import Button from "@/components/common/button";
 import { Form, Formik } from "formik";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

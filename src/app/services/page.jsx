@@ -1,3 +1,4 @@
+"use client";
 import { H1, H2, H3, H4, H5, P } from "@/components/common/Typography";
 import Button from "@/components/common/button";
 import { Services } from "@/components/common/constant";

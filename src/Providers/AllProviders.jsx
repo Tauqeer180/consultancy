@@ -1,12 +1,14 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { AuthProvider } from "./AuthContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
 // ..
 export default function AllProviders({ children }) {
-  AOS.init();
+  useEffect(() => {
+    AOS.init();
+  }, []);
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
